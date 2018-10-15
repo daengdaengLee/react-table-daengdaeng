@@ -4,6 +4,7 @@ import _ from 'underscore';
 import { _firstToArray } from '../../../assets/js/utils';
 import Cell from '../../1-atoms/cell';
 import MarginBox from '../../1-atoms/margin-box';
+import Row from '../../1-atoms/row';
 import TBody from '../../1-atoms/t-body';
 import THead from '../../1-atoms/t-head';
 
@@ -31,10 +32,11 @@ class Table extends Component {
       columns,
       width,
       height,
-      haederHeight,
+      rowHeight,
       tableBodyMarginTop,
       tableBodyMarginBottom,
       fixedColNum,
+      rowIdKey,
       setScrollRef,
       onClickContainer,
       renderCell,
@@ -61,25 +63,35 @@ class Table extends Component {
         <div ref={_fixedCols} style={{ position: 'relative' }}>
           <THead
             innerRef={_fixedColsHeader}
-            height={haederHeight}
-            minHeight={haederHeight}
+            height={rowHeight}
+            minHeight={rowHeight}
             zIndex={200}
           >
             {fixedColumns.map(col => renderCell(null, col))}
           </THead>
           <TBody marginTop={tableBodyMarginTop}>
+            {rows.map(row => (
+              <Row key={row[rowIdKey]} rowHeight={rowHeight}>
+                {fixedColumns.map(col => renderCell(row, col))}
+              </Row>
+            ))}
             <MarginBox height={tableBodyMarginBottom} />
           </TBody>
         </div>
         <div>
           <THead
             innerRef={_tableHeader}
-            height={haederHeight}
-            minHeight={haederHeight}
+            height={rowHeight}
+            minHeight={rowHeight}
           >
             {restColumns.map(col => renderCell(null, col))}
           </THead>
           <TBody marginTop={tableBodyMarginTop}>
+            {rows.map(row => (
+              <Row key={row[rowIdKey]}>
+                {restColumns.map(col => renderCell(row, col))}
+              </Row>
+            ))}
             <MarginBox height={tableBodyMarginBottom} />
           </TBody>
         </div>
@@ -112,14 +124,15 @@ Table.defaultProps = {
   columns: [],
   width: '100%',
   height: '100%',
-  haederHeight: '40px',
+  rowHeight: '40px',
   tableBodyMarginTop: '0px',
   tableBodyMarginBottom: '0px',
   fixedColNum: 0,
+  rowIdKey: 'id',
   setScrollRef: el => {},
   onScroll: event => {},
   onClickContainer: event => {},
-  renderCell: (row, col) => <Cell>{row[col.id]}</Cell>,
+  renderCell: (row, col) => <Cell key={col.id}>{row[col.id]}</Cell>,
 };
 
 Table.propTypes = {
@@ -127,10 +140,11 @@ Table.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.object),
   width: PropTypes.string,
   height: PropTypes.string,
-  haederHeight: PropTypes.string,
+  rowHeight: PropTypes.string,
   tableBodyMarginTop: PropTypes.string,
   tableBodyMarginBottom: PropTypes.string,
   fixedColNum: PropTypes.number,
+  rowIdKey: PropTypes.string,
   setScrollRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   onScroll: PropTypes.func,
   onClickContainer: PropTypes.func,
