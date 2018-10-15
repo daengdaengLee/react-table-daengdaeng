@@ -37,6 +37,7 @@ class Table extends Component {
       tableBodyMarginBottom,
       fixedColNum,
       rowIdKey,
+      rowHeightKey,
       setScrollRef,
       onClickContainer,
       renderCell,
@@ -71,7 +72,14 @@ class Table extends Component {
           </THead>
           <TBody marginTop={tableBodyMarginTop}>
             {rows.map(row => (
-              <Row key={row[rowIdKey]} rowHeight={rowHeight}>
+              <Row
+                key={row[rowIdKey]}
+                rowHeight={
+                  _.isUndefined(row[rowHeightKey])
+                    ? rowHeight
+                    : row[rowHeightKey]
+                }
+              >
                 {fixedColumns.map(col => renderCell(row, col))}
               </Row>
             ))}
@@ -88,7 +96,14 @@ class Table extends Component {
           </THead>
           <TBody marginTop={tableBodyMarginTop}>
             {rows.map(row => (
-              <Row key={row[rowIdKey]}>
+              <Row
+                key={row[rowIdKey]}
+                rowHeight={
+                  _.isUndefined(row[rowHeightKey])
+                    ? rowHeight
+                    : row[rowHeightKey]
+                }
+              >
                 {restColumns.map(col => renderCell(row, col))}
               </Row>
             ))}
@@ -129,6 +144,7 @@ Table.defaultProps = {
   tableBodyMarginBottom: '0px',
   fixedColNum: 0,
   rowIdKey: 'id',
+  rowHeightKey: 'height',
   setScrollRef: el => {},
   onScroll: event => {},
   onClickContainer: event => {},
@@ -147,6 +163,7 @@ Table.propTypes = {
   tableBodyMarginBottom: PropTypes.string,
   fixedColNum: PropTypes.number,
   rowIdKey: PropTypes.string,
+  rowHeightKey: PropTypes.string,
   setScrollRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   onScroll: PropTypes.func,
   onClickContainer: PropTypes.func,
