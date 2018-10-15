@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import MarginBox from '../../1-atoms/margin-box';
+import TBody from '../../1-atoms/t-body';
 import THead from '../../1-atoms/t-head';
 
 class Table extends Component {
@@ -16,6 +18,8 @@ class Table extends Component {
       width,
       height,
       haederHeight,
+      tableBodyMarginTop,
+      tableBodyMarginBottom,
       setScrollRef,
       onClickContainer,
     } = this.props;
@@ -43,7 +47,9 @@ class Table extends Component {
           >
             fixed cols head
           </THead>
-          <div>fixed cols body</div>
+          <TBody marginTop={tableBodyMarginTop}>
+            <MarginBox height={tableBodyMarginBottom} />
+          </TBody>
         </div>
         <div>
           <THead
@@ -53,7 +59,9 @@ class Table extends Component {
           >
             head
           </THead>
-          <div>body</div>
+          <TBody marginTop={tableBodyMarginTop}>
+            <MarginBox height={tableBodyMarginBottom} />
+          </TBody>
         </div>
       </div>
     );
