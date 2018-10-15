@@ -1,25 +1,80 @@
 {
   "name": "react-table-daengdaeng",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "2.0.5"
+    "prop-types": "^15.6.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public",
+    "generate": "rm -rf dist && NODE_ENV=production babel src --out-dir dist --ignore \"src/stories/**/*\" --copy-files && rm -rf dist/index.js dist/stories/ dist/serviceWorker.js"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+      "quotes": [
+        "error",
+        "single",
+        {
+          "avoidEscape": true
+        }
+      ],
+      "indent": [
+        "error",
+        2
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "comma-dangle": [
+        "error",
+        {
+          "arrays": "always-multiline",
+          "objects": "always-multiline",
+          "imports": "always-multiline",
+          "exports": "always-multiline",
+          "functions": "always-multiline"
+        }
+      ]
+    }
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "v4.0.0-alpha.25",
+    "@storybook/addon-links": "v4.0.0-alpha.25",
+    "@storybook/addons": "v4.0.0-alpha.25",
+    "@storybook/react": "v4.0.0-alpha.25",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "2.0.5"
+  },
+  "main": "dist/components/index.js",
+  "module": "dist/components/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daengdaengLee/react-table-daengdaeng.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "daengdaengLee",
+    "email": "gunho1020@gmail.com"
+  }
 }
