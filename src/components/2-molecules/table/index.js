@@ -132,7 +132,9 @@ Table.defaultProps = {
   setScrollRef: el => {},
   onScroll: event => {},
   onClickContainer: event => {},
-  renderCell: (row, col) => <Cell key={col.id}>{row[col.id]}</Cell>,
+  renderCell: (row, col) => (
+    <Cell key={col.id}>{_.isNull(row) ? col.title : row[col.id]}</Cell>
+  ),
 };
 
 Table.propTypes = {
