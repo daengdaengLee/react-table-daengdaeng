@@ -68,10 +68,12 @@ class Table extends Component {
             minHeight={rowHeight}
             zIndex={200}
           >
-            {fixedColumns.map(col => renderCell(null, col))}
+            {fixedColumns.map((col, colIdx) =>
+              renderCell(null, col, -1, colIdx),
+            )}
           </THead>
           <TBody marginTop={tableBodyMarginTop}>
-            {rows.map(row => (
+            {rows.map((row, rowIdx) => (
               <Row
                 key={row[rowIdKey]}
                 rowHeight={
@@ -80,7 +82,9 @@ class Table extends Component {
                     : row[rowHeightKey]
                 }
               >
-                {fixedColumns.map(col => renderCell(row, col))}
+                {fixedColumns.map((col, colIdx) =>
+                  renderCell(row, col, rowIdx, colIdx),
+                )}
               </Row>
             ))}
             <MarginBox height={tableBodyMarginBottom} />
@@ -92,10 +96,12 @@ class Table extends Component {
             height={rowHeight}
             minHeight={rowHeight}
           >
-            {restColumns.map(col => renderCell(null, col))}
+            {restColumns.map((col, colIdx) =>
+              renderCell(null, col, -1, colIdx + fixedColNum),
+            )}
           </THead>
           <TBody marginTop={tableBodyMarginTop}>
-            {rows.map(row => (
+            {rows.map((row, rowIdx) => (
               <Row
                 key={row[rowIdKey]}
                 rowHeight={
@@ -104,7 +110,9 @@ class Table extends Component {
                     : row[rowHeightKey]
                 }
               >
-                {restColumns.map(col => renderCell(row, col))}
+                {restColumns.map((col, colIdx) =>
+                  renderCell(row, col, rowIdx, colIdx + fixedColNum),
+                )}
               </Row>
             ))}
             <MarginBox height={tableBodyMarginBottom} />
@@ -148,7 +156,7 @@ Table.defaultProps = {
   setScrollRef: el => {},
   onScroll: event => {},
   onClickContainer: event => {},
-  renderCell: (row, col) => (
+  renderCell: (row, col, rowIdx, colIdx) => (
     <Cell key={col.id}>{_.isNull(row) ? col.title : row[col.id]}</Cell>
   ),
 };
