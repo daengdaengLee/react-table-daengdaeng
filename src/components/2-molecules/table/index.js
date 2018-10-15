@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import THead from '../../1-atoms/t-head';
 
 class Table extends Component {
   constructor(props) {
     super(props);
     this._fixedCols = React.createRef();
+    this._fixedColsHeader = React.createRef();
+    this._tableHeader = React.createRef();
   }
 
   render() {
-    const { _fixedCols } = this;
-    const { width, height, setScrollRef, onClickContainer } = this.props;
+    const { _fixedCols, _fixedColsHeader, _tableHeader } = this;
+    const {
+      width,
+      height,
+      haederHeight,
+      setScrollRef,
+      onClickContainer,
+    } = this.props;
 
     return (
       <div
@@ -26,11 +35,24 @@ class Table extends Component {
         onClick={onClickContainer}
       >
         <div ref={_fixedCols} style={{ position: 'relative' }}>
-          <div>fixed cols head</div>
+          <THead
+            innerRef={_fixedColsHeader}
+            height={haederHeight}
+            minHeight={haederHeight}
+            zIndex={200}
+          >
+            fixed cols head
+          </THead>
           <div>fixed cols body</div>
         </div>
         <div>
-          <div>head</div>
+          <THead
+            innerRef={_tableHeader}
+            height={haederHeight}
+            minHeight={haederHeight}
+          >
+            head
+          </THead>
           <div>body</div>
         </div>
       </div>
@@ -43,6 +65,7 @@ Table.defaultProps = {
   columns: [],
   width: '100%',
   height: '100%',
+  haederHeight: '40px',
   tableBodyMarginTop: '0px',
   tableBodyMarginBottom: '0px',
   fixedColNum: 0,
@@ -57,6 +80,7 @@ Table.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.object),
   width: PropTypes.string,
   height: PropTypes.string,
+  haederHeight: PropTypes.string,
   tableBodyMarginTop: PropTypes.string,
   tableBodyMarginBottom: PropTypes.string,
   fixedColNum: PropTypes.number,
