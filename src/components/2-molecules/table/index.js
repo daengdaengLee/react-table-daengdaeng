@@ -35,6 +35,8 @@ class Table extends Component {
       rowHeight,
       tableBodyMarginTop,
       tableBodyMarginBottom,
+      tableBodyMarginLeft,
+      tableBodyMarginRight,
       fixedColNum,
       rowIdKey,
       rowHeightKey,
@@ -90,7 +92,12 @@ class Table extends Component {
             <MarginBox height={tableBodyMarginBottom} />
           </TBody>
         </div>
-        <div>
+        <div
+          style={{
+            paddingLeft: tableBodyMarginLeft,
+            paddingRight: tableBodyMarginRight,
+          }}
+        >
           <THead
             innerRef={_tableHeader}
             height={rowHeight}
@@ -150,6 +157,8 @@ Table.defaultProps = {
   rowHeight: '40px',
   tableBodyMarginTop: '0px',
   tableBodyMarginBottom: '0px',
+  tableBodyMarginLeft: '0px',
+  tableBodyMarginRight: '0px',
   fixedColNum: 0,
   rowIdKey: 'id',
   rowHeightKey: 'height',
@@ -169,6 +178,8 @@ Table.propTypes = {
   rowHeight: PropTypes.string,
   tableBodyMarginTop: PropTypes.string,
   tableBodyMarginBottom: PropTypes.string,
+  tableBodyMarginLeft: PropTypes.string,
+  tableBodyMarginRight: PropTypes.string,
   fixedColNum: PropTypes.number,
   rowIdKey: PropTypes.string,
   rowHeightKey: PropTypes.string,
