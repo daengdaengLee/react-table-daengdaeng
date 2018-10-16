@@ -1,6 +1,6 @@
 {
   "name": "@daengdaenglee/react-table",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "dependencies": {
     "prop-types": "^15.6.2",
     "underscore": "^1.9.1"
