@@ -16,7 +16,7 @@ const TBody = ({ marginTop, style, children, ...props }) => (
 );
 
 TBody.defaultProps = {
-  marginTop: '40px',
+  marginTop: '0px',
   style: {},
   children: null,
 };
