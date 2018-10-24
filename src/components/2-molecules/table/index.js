@@ -40,6 +40,7 @@ class Table extends Component {
       fixedColNum,
       rowIdKey,
       rowHeightKey,
+      containerStyle,
       setScrollRef,
       onClickContainer,
       renderCell,
@@ -58,6 +59,7 @@ class Table extends Component {
           display: 'flex',
           flexDirection: 'row',
           backgroundColor: 'transparent',
+          ...containerStyle,
         }}
         ref={setScrollRef}
         onClick={onClickContainer}
@@ -162,6 +164,7 @@ Table.defaultProps = {
   fixedColNum: 0,
   rowIdKey: 'id',
   rowHeightKey: 'height',
+  containerStyle: {},
   setScrollRef: el => {},
   onScroll: event => {},
   onClickContainer: event => {},
@@ -183,6 +186,7 @@ Table.propTypes = {
   fixedColNum: PropTypes.number,
   rowIdKey: PropTypes.string,
   rowHeightKey: PropTypes.string,
+  containerStyle: PropTypes.object,
   setScrollRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   onScroll: PropTypes.func,
   onClickContainer: PropTypes.func,
