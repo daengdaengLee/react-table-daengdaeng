@@ -26,6 +26,7 @@ class VirtualizedTable extends Component {
       props: {
         height,
         width,
+        style,
         rowCount,
         colCount,
         renderRowCount,
@@ -117,7 +118,10 @@ class VirtualizedTable extends Component {
       fixedCorner = <div ref={_fixedCorner} style={style} />;
     }
     return (
-      <div style={{ overflow: 'auto', width, height }} onScroll={_onScroll}>
+      <div
+        style={{ ...style, overflow: 'auto', width, height }}
+        onScroll={_onScroll}
+      >
         <div
           style={{
             position: 'relative',
@@ -227,6 +231,7 @@ class VirtualizedTable extends Component {
 VirtualizedTable.defaultProps = {
   height: 300,
   width: 300,
+  style: {},
   rowCount: 1000,
   colCount: 100,
   renderRowCount: 10,
@@ -284,6 +289,7 @@ VirtualizedTable.defaultProps = {
 VirtualizedTable.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  style: PropTypes.object,
   rowCount: PropTypes.number,
   colCount: PropTypes.number,
   renderRowCount: PropTypes.number,
